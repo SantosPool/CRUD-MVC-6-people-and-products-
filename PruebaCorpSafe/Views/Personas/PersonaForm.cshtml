@@ -1,0 +1,166 @@
+﻿@model IEnumerable<PruebaCorpSafe.Models.Persona>
+
+@{
+    ViewData["Title"] = "PersonaForm";
+}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+<div class="container">
+    <h2>Personas</h2>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Formulario Persona</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label class="radio-inline">
+                        <input type="radio" name="sexo" id="Hombre" value="0" checked>Hombre
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sexo" id="Mujer" value="1">Mujer
+                    </label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-label">Casado</label>
+                    <input type="checkbox" id="Casado" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label class="form-label">Nombre</label>
+                    <input class="form-control" id="Nombre" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label class="form-label">Edad</label>
+                    <input class="form-control" id="Edad" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label class="form-label">Mes</label>
+                    <select class="form-control" id="Mes"></select>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <p>
+                <input id="btnUno" class="btn btn-success" type="button" value="1er.Boton" />
+                <input id="btnDos" class="btn btn-success" type="button" value="2do.Boton" />
+                <input id="btnTres" class="btn btn-success" type="button" value="3er.Boton" />
+            </p>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" id="vistapersona" style="display:none;">
+    <div class="panel-heading">Formulario Persona</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="label-default" id="lblsexo">
+                </label>
+                <label class="label-default" id="lblcasado">
+                </label>
+                <label class="label-default" id="lblnombre">
+                </label>
+                <label class="label-default" id="lbledad">
+                </label>
+                <label class="label-default" id="lblmes">
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Casado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Casado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-success">Editar</button></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-info">Detalles</button></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Eliminar</button></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos Persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="label-default" id="lblsexom">
+                        </label>
+                        <label class="label-default" id="lblcasadom">
+                        </label>
+                        <label class="label-default" id="lblnombrem">
+                        </label>
+                        <label class="label-default" id="lbledadm">
+                        </label>
+                        <label class="label-default" id="lblmesm">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="Id" value="0" />
+<script type="text/javascript">   
+    $(document).ready(function () {
+        CargarDatosSelect();
+    });
+</script>
+

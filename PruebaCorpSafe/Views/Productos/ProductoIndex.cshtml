@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PruebaCorpSafe.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- jQuery library -->
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<h2>Productos</h2>
+
+<p>
+    <a asp-action="ProductoIndex"><button class="btn btn-primary" id="btnConsulta">Consultar Productos</button></a>
+</p>
+<div class="row" id="grupo1" >
+    <div class="col-sm-4">
+        <a asp-action="OrdenarProductos" asp-controller="Productos"
+           asp-route-Tipo="Activos">
+            Activos
+            <input type="checkbox" />
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="OrdenarProductos" asp-controller="Productos"
+           asp-route-Tipo="Descontinuados">
+            Descontinuados
+            <input type="checkbox" />
+        </a>
+    </div>
+</div>
+<table class="table" id="tablaproductos">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descontinuado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descontinuado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row" id="grupo2" >
+    <div class="col-sm-4">
+        <a asp-action="OrdenarProductos" asp-controller="Productos"
+           asp-route-Tipo="MenorMayorPrecio">
+            Menor-Mayor Precio
+            <input type="checkbox" />
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="OrdenarProductos" asp-controller="Productos"
+           asp-route-Tipo="MayorMenorPrecio">
+            Mayor-Menor Precio
+            <input type="checkbox"/>
+        </a>
+    </div>
+</div>
